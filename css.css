@@ -1,0 +1,57 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Contêiner para centralizar o conteúdo */
+center {
+    display: block;
+}
+
+/* Estilização da imagem */
+img {
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Estilização do título */
+h5 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Estilo para os botões */
+button {
+    background-color: #008cba;
+    color: white;
+    font-size: 1em;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #006f8e;
+    transform: scale(1.05);
+}
+
+/* Efeito ao clicar no botão */
+button:active {
+    transform: scale(0.98);
+}

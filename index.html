@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://kaique-nascimento.github.io/HighBand/css/grid.css">
+    <link rel="stylesheet" href="css.css">
+    <title>Trabalhe e trabalhe!</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <center>
+            <!-- Coluna para a imagem -->
+                <img src="https://www.shutterstock.com/image-vector/happy-stickman-icon-pictogram-vector-260nw-738452443.jpg" alt="Ícone feliz">
+    
+            <!-- Coluna para as informações -->
+                <div class="row">
+                    <h1 id="titulo">Iniciou-se mais um dia! O que você escolhe?</h1>
+                    <h5 id="situacaoDia">Como?</h5>
+                    <h5>Dinheiro Atual: R$<span id="dinheiro"></span> </h5>
+                    <h5>Cansaço: <span id="cansaco"></span> </h5>
+                    <p>Hoje você está: <span id="situacaoCansaco">Preparada para viver!</p>
+                    <h5>Dia: <span id="contador"></span> </h5>
+                    
+                    <div class="row" style="margin-top: -3%">
+                        <div class="col-5">
+                            <button id="opcao1" onclick="escolha(this)">Dormir</button>
+                        </div>
+                        <div class="col-5">
+                            <button id="opcao2" onclick="escolha(this)">Ir trabalhar</button>
+                        </div>
+                        <div class="col-2">
+                            <button id="recomecar" onclick="escolha(this)">Recomeçar</button>
+                        </div>
+                    </div>
+    
+                    <button id="tentacao" onclick="escolha(this)">Comprar bolo na Sodiê (R$50 / -30 Cansaço)</button>
+                </div>
+    </center>
+    
+    <script>
+        let opcao1 = document.getElementById('opcao1');
+        let opcao2 = document.getElementById('opcao2');
+        let recomecar = document.getElementById('recomecar');
+        let titulo = document.getElementById('titulo');
+        let situacaoDia = document.getElementById('situacaoDia');
+        let situacaoCansaco = document.getElementById('situacaoCansaco');
+        let dinheiro = document.getElementById('dinheiro');
+        let cansaco = document.getElementById('cansaco');
+        let contador = document.getElementById('contador');
+        let tentacao = document.getElementById('tentacao');
+        let carteira = 0;
+        let nivelCansaco = 0;
+        dinheiro.innerText = carteira
+        cansaco.innerText = nivelCansaco
+        let contadorDia = 1
+        contador.innerText = contadorDia
+        situacaoCansaco.style.display = "block";
+        situacaoDia.style.display = "none"
+        arrumou = 'n'
+        recomecar.style.display = "none"; 
+        tentacao.style.display = "none"; 
+    function inicio(){
+        
+        opcao1.style.display = "block";  
+            opcao2.style.display = "block";  
+            recomecar.style.display = "none";  
+            tentacao.style.display = "none"; 
+            situacaoCansaco.style.display = "block"; 
+            situacaoDia.style.display = "none" 
+            carteira = 0
+            nivelCansaco = 0
+            contadorDia = 1
+            dinheiro.innerText = carteira
+        cansaco.innerText = nivelCansaco
+        contador.innerText = contadorDia
+        
+        opcao1.innerText = "Dormir";
+                opcao2.innerText = "Ir trabalhar";
+                titulo.innerText = "Iniciou-se mais um dia! O que você escolhe?";
+    }
+        function randomico(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;  
+        }
+        function ComoFoiDia(dia) {
+    let situation = "";
+    situacaoDia.style.display = "block";
+    
+    if (dia > 1 && dia <= 10) {
+        situation = "Hoje o dia foi tranquilo";
+    } else if (dia > 10 && dia <= 20) {
+        situation = "Hoje o dia foi um pouco turbulento";
+    } else if (dia > 20 && dia <= 30) {
+        situation = "Hoje o dia foi turbulento";
+    } else if (dia > 30) {
+        situation = "HOJE O DIA FOI MUITO TURBULENTO";
+    }
+
+    situacaoDia.innerText = situation;  // Atualiza o texto
+    return situation;  // Não precisa de `console.log` aqui, só retornando o texto
+}
+
+
+function ComoEstaCansaco(cansaco) {
+    let situacaoCansaco = ""; 
+    
+    if (cansaco >= 0 && cansaco <= 10) {
+        situacaoCansaco = "Bem";
+    } else if (cansaco > 10 && cansaco <= 20) {
+        situacaoCansaco = "Um pouco cansado";
+    } else if (cansaco > 20 && cansaco <= 50) {
+        situacaoCansaco = "Cansado";
+    } else if (cansaco > 50 && cansaco <= 99) {
+        situacaoCansaco = "Muito Cansado";
+    } else {
+        situacaoCansaco = "Morto";
+        titulo.innerText = "Você morreu de tanto cansaço :^("
+        recomecar.style.display = "block"
+        opcao1.style.display = "none"
+        opcao2.style.display = "none"
+        tentacao.style.display = "none"
+        situacaoDia.style.display = "none"
+    }
+
+    return situacaoCansaco; 
+}
+
+
+        function escolha(isso) {
+            if (isso.innerText == "Recomeçar") {
+                inicio()
+            }
+            else if (isso.innerText == "Dormir") {
+                titulo.innerText = "Você dormiu e foi demitido";
+                opcao1.style.display = "none"; 
+                opcao2.style.display = "none";  
+                recomecar.style.display = "block";  
+            }
+    
+            else if (isso.innerText == "Ir trabalhar") {
+                titulo.innerText = "Você chegou do trabalho";
+                opcao1.innerText = "Ler livro";
+                opcao2.innerText = "Passar para o outro dia";
+                pc = randomico(20, 1)
+                nivelCansaco += pc
+                ComoFoiDia(pc)
+                situacaoCansaco.innerText = ComoEstaCansaco(nivelCansaco)
+                carteira += 100; 
+                dinheiro.innerText = carteira;  
+                cansaco.innerText = nivelCansaco;  
+            }
+            else if (isso.innerText == "Ler livro") {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você leu um livro e conseguiu descansar!";
+                nivelCansaco -= 5;  
+                nivelCansaco = Math.max(nivelCansaco, 0); 
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";  
+                cansaco.innerText = nivelCansaco; 
+                
+            }
+            /*PASSAR DIAS*/
+            else if (isso.innerText == "Passar para o outro dia") {
+                contadorDia += 1
+                contador.innerText = contadorDia
+                if (contadorDia == 7){
+                    titulo.innerText = "Chegou o tão esperado dia..."
+                    situacaoDia.style.display = "none"
+                    tentacao.style.display = "none"
+                    opcao1.style.display = "none"
+                    opcao2.style.display = "block"
+                    opcao2.innerText = "Viajar"
+                }
+                else{
+                    titulo.innerText = "Um novo dia raiou! O que você quer fazer?";
+                    opcao1.innerText = "Continuar dormindo";
+                    opcao2.innerText = "Levantar da cama e ir trabalhar";
+                    opcao2.style.display = "block"; 
+                    console.log(pc)
+                    situacaoDia.style.display = "none"
+                    tentacao.style.display = "none"
+                }
+
+            }
+            
+            else if (isso.innerText == "Continuar dormindo") {
+                titulo.innerText = "Você dormiu demais e foi demitido!";
+                opcao1.style.display = "none";  
+                opcao2.style.display = "none";  
+                recomecar.style.display = "block";  
+            }
+            else if (isso.innerText == "Levantar da cama e ir trabalhar") {
+                titulo.innerText = "Você chegou do trabalho";
+                situacaoCansaco.style.display = "block"
+                tentacao.style.display = "none"
+                opcao1.innerText = "Estudar alguma coisa";
+                opcao2.innerText = "Passar para o outro dia";
+                ComoFoiDia(pc)
+                carteira += 100;  
+                
+                 
+                if (contadorDia == 2) {
+                    tentacao.innerText = "Comprar donut de nutella (R$30 / -10 Cansaço)"
+                    tentacao.style.display = "block" 
+                    pc = randomico(20, 10)
+                    nivelCansaco += pc
+                    ComoFoiDia(pc) 
+                }
+                 else if (contadorDia == 3){
+                    tentacao.innerText = "Comprar bolo da Sodiê (R$50 / -30 Cansaço)"
+                    tentacao.style.display = "block" 
+                    opcao1.innerText = "Escrever 1 capítulo de um livro";
+                    pc = randomico(30, 20)
+                    nivelCansaco += pc
+                    ComoFoiDia(pc)
+                }
+                 else if (contadorDia == 4){
+                    tentacao.innerText = "Comprar copo de sobremesa (R$150 / -60 Cansaço)"
+                    tentacao.style.display = "block"
+                    opcao1.innerText = "Ir ao campo"
+                    pc = randomico(40,30)
+                    nivelCansaco += pc
+                    ComoFoiDia(pc)
+                 }
+                 else if (contadorDia == 5){
+                    opcao1.innerText = "negocio";
+                    pc = randomico(40,20)
+                    tentacao.innerText = "tentação 5"
+                    tentacao.style.display = "block"
+                    nivelCansaco += pc
+                    ComoFoiDia(pc)
+                 }
+                 else if (contadorDia == 6){
+                    opcao1.innerText = "Arrumar as malas para a viagem";
+                    pc = randomico(45,25)
+                    nivelCansaco += pc
+                    ComoFoiDia(pc)
+                 }
+                 dinheiro.innerText = carteira;  
+                cansaco.innerText = nivelCansaco; 
+                situacaoCansaco.innerText = ComoEstaCansaco(nivelCansaco)
+            }
+    
+            else if (isso.innerText == "Estudar alguma coisa") {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você estudou um pouco e diminuiu seu cansaço!";
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";
+                nivelCansaco -= 10;  
+                nivelCansaco = Math.max(nivelCansaco, 0);
+                cansaco.innerText = nivelCansaco;
+            }
+            else if (isso.innerText == "Ir ao campo") {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você foi ao campo e conseguiu descançar!";
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";
+                nivelCansaco -= 20;  
+                nivelCansaco = Math.max(nivelCansaco, 0);
+                cansaco.innerText = nivelCansaco;
+            }
+            else if (isso.innerText == "Escrever 1 capítulo de um livro") {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você escreveu o capítulo de 1 livro e postou!\nOs fãs amaram!";
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";
+                nivelCansaco -= 20;  
+                nivelCansaco = Math.max(nivelCansaco, 0);
+                cansaco.innerText = nivelCansaco;
+            }
+            else if (isso.innerText == "negocio") {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "negocio";
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";
+                nivelCansaco -= 30;  
+                nivelCansaco = Math.max(nivelCansaco, 0);
+                cansaco.innerText = nivelCansaco;
+            }
+            else if (isso.innerText == "Arrumar as malas para a viagem") {
+                arrumou = 's'
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você cansou um pouco por ter arrumado as malas\nMas deu tudo certo!";
+                opcao1.innerText = "Passar para o outro dia";
+                opcao2.style.display = "none";
+                nivelCansaco += 20;  
+                situacaoCansaco.innerText = ComoEstaCansaco(nivelCansaco)
+                nivelCansaco = Math.max(nivelCansaco, 0);
+                cansaco.innerText = nivelCansaco;
+            }
+            else if (isso.innerText == "Viajar" && arrumou != 's') {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você foi viajar sem arrumar as malas?\nNananinanão ❌\nVolte e arrume suas malas!";
+                recomecar.style.display = "block"; 
+                opcao2.style.display = "none";
+                opcao1.style.display = "none";
+            }
+            else if (isso.innerText == "Viajar" && arrumou == 's') {
+                situacaoDia.style.display = "none"
+                titulo.innerText = "Você foi viajar e deu tudo certo!\nParabéns!";
+                opcao2.style.display = "none";
+                opcao1.style.display = "none";
+                recomecar.style.display = "block"; 
+            }
+            /*TENTAÇÕES*/
+            else if (isso.innerText == "Comprar bolo da Sodiê (R$50 / -30 Cansaço)") {
+                if (carteira >= 50) { 
+                    titulo.innerText = "Você comprou e comeu o bolo da Sodiê!\nEstava delicioso!";
+                    situacaoDia.style.display = "none"
+                    nivelCansaco -= 30;
+                    tentacao.style.display = "none";
+                    nivelCansaco = Math.max(nivelCansaco, 0); 
+                    carteira -= 50;  
+                    dinheiro.innerText = carteira;  
+                    cansaco.innerText = nivelCansaco;  
+                    tentacao.style.display = "none" 
+                } else {
+                    titulo.innerText = "Você não tem dinheiro suficiente para comprar o bolo!";
+                    tentacao.style.display = "none";  
+                    opcao1.innerText = "Passar para o outro dia";
+                    opcao2.style.display = "none";
+                }
+            }
+            else if (isso.innerText == "Comprar donut de nutella (R$30 / -10 Cansaço)") {
+                if (carteira >= 50) { 
+                    titulo.innerText = "Você comprou e comeu um donut de nutella!\nEstava delicioso😋";
+                    situacaoDia.style.display = "none"
+                    nivelCansaco -= 10;
+                    tentacao.style.display = "none";
+                    nivelCansaco = Math.max(nivelCansaco, 0); 
+                    carteira -= 50;  
+                    dinheiro.innerText = carteira;  
+                    cansaco.innerText = nivelCansaco; 
+                    tentacao.style.display = "none" 
+                } else {
+                    titulo.innerText = "Você não tem dinheiro suficiente para comprar o donut!";
+                    tentacao.style.display = "none";  
+                    opcao1.innerText = "Passar para o outro dia";
+                    opcao2.style.display = "none";
+                }
+            }
+            else if (isso.innerText == "Comprar copo de sobremesa (R$150 / -60 Cansaço)") {
+                if (carteira >= 50) { 
+                    titulo.innerText = "Você comprou e comeu um copo de sobremesa!\nVocê poderia ter adquirido diabetes😯\n Mas valeu a pena arriscar😁";
+                    situacaoDia.style.display = "none"
+                    nivelCansaco -= 60;
+                    tentacao.style.display = "none";
+                    nivelCansaco = Math.max(nivelCansaco, 0); 
+                    carteira -= 150;  
+                    dinheiro.innerText = carteira;  
+                    cansaco.innerText = nivelCansaco; 
+                    tentacao.style.display = "none" 
+                } else {
+                    titulo.innerText = "Você não tem dinheiro suficiente para comprar o copo!";
+                    tentacao.style.display = "none";  
+                    opcao1.innerText = "Passar para o outro dia";
+                    opcao2.style.display = "none";
+                }
+            }
+            else if (isso.innerText == "tentação 5") {
+                if (carteira >= 250) { 
+                    titulo.innerText = "tentação 5";
+                    situacaoDia.style.display = "none"
+                    nivelCansaco -= 70;
+                    tentacao.style.display = "none";
+                    nivelCansaco = Math.max(nivelCansaco, 0); 
+                    carteira -= 250;  
+                    dinheiro.innerText = carteira;  
+                    cansaco.innerText = nivelCansaco; 
+                    tentacao.style.display = "none" 
+                } else {
+                    titulo.innerText = "tentação 5";
+                    tentacao.style.display = "none";  
+                    opcao1.innerText = "Passar para o outro dia";
+                    opcao2.style.display = "none";
+                }
+            }
+        }
+    </script>
+    
+    <!-- Os dias vão até 1 semana - 7 dias
+        a cada dia, ter uma forma de matar o cansaço diferente,
+        se não ter x reais na conta, não viaja e o jogo recomeça
+        fazer eventos aleatórios para perder dinheiro e diminuir o cansaço
+        TEM QUE FAZER SISTEMA DE PAGAR CONTA
+    -->
+    
+
+</body>
+</html>
